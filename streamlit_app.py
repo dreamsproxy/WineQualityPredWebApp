@@ -20,11 +20,10 @@ def get_correlation_heatmap():
 
     fig = px.imshow(z, text_auto=True)
 
-    tab1, tab2 = st.tabs(["Data Correlation"])
+    tab1 = st.tabs(["Data Correlation"])
     with tab1:
         st.plotly_chart(fig, theme="streamlit")
-    with tab2:
-        st.plotly_chart(fig, theme=None)
+
 get_correlation_heatmap()
 x = st.slider('x')  # 👈 this is a widget
 st.write(x, 'squared is', x * x)
