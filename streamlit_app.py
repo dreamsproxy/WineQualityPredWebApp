@@ -9,11 +9,14 @@ df = load_dataset()
 def get_correlation_heatmap(df):
     correlation = df.corr()
 
-    fig = px.imshow(correlation, text_auto=True, width=800, height=800, aspect="equal")
+    fig = px.imshow(correlation, title = "Correlation Heatmap",
+                    text_auto=True,
+                    width=800, height=800, aspect="equal")
     st.plotly_chart(fig, theme="streamlit")
 
-st.title("<center>White Wine Quality Prediction</center>")
+st.title("White Wine Quality Prediction")
 
+st.write()
 get_correlation_heatmap(df)
 
 st.line_chart()
