@@ -12,7 +12,7 @@ def get_correlation_heatmap(df):
     fig = px.imshow(correlation, text_auto=True, width=800, height=800, aspect="equal")
     st.plotly_chart(fig, theme="streamlit")
 
-st.title("White Wine Quality Prediction")
+st.title("<center>White Wine Quality Prediction</center>")
 
 get_correlation_heatmap(df)
 
