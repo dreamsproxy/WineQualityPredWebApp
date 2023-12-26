@@ -19,10 +19,7 @@ def get_correlation_heatmap():
          [.3, .4, .5, .7, 1]]
 
     fig = px.imshow(z, text_auto=True)
-
-    tab1 = st.tabs(["Data Correlation"])
-    with tab1:
-        st.plotly_chart(fig, theme="streamlit")
+    st.plotly_chart(fig, theme="streamlit")
 
 get_correlation_heatmap()
 x = st.slider('x')  # 👈 this is a widget
