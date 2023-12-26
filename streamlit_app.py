@@ -19,6 +19,6 @@ def get_correlation_heatmap():
         st.plotly_chart(fig, theme="streamlit")
     with tab2:
         st.plotly_chart(fig, theme=None)
-
+get_correlation_heatmap()
 x = st.slider('x')  # 👈 this is a widget
 st.write(x, 'squared is', x * x)
