@@ -2,7 +2,9 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 @st.cache_data
-def 
+def load_dataset():
+    df = pd.read_csv('winequality-white.csv', delimiter=';')
+    return df
 
 st.title("White Wine Quality Prediction")
 st.write("White Wine Quality Prediction")
