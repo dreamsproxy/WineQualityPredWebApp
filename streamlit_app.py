@@ -1,10 +1,14 @@
 import streamlit as st
+import pandas as pd
+import plotly.express as px
+@st.cache_data
+def 
+
 st.title("White Wine Quality Prediction")
 st.write("White Wine Quality Prediction")
 st.line_chart()
 
 def get_correlation_heatmap():
-    import plotly.express as px
 
     z = [[.1, .3, .5, .7, .9],
          [1, .8, .6, .4, .2],
