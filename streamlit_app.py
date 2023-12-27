@@ -10,6 +10,8 @@ import tensorflow as tf
 import pickle
 import base64
 
+import stqdm
+
 scaler = StandardScaler()
 encoder = LabelEncoder()
 
@@ -110,7 +112,7 @@ if __name__ == "__main__":
     
     x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
     build_bool  = st.sidebar.button("Build and Train Model")
-
+    st.progress(value, text=None)
     if build_bool:
         compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
         history, model = train(compiled_model, x_train, y_train)
