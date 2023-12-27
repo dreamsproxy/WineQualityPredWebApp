@@ -112,14 +112,10 @@ if __name__ == "__main__":
     compile_bool  = st.sidebar.button("Build model.")
     if compile_bool:
         compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
-        safe_to_train_bool = True
-    else:
-        safe_to_train_bool = False
-    
-    train_bool = False
-    if safe_to_train_bool:
-        train_bool = st.sidebar.button("Start Training Sequence", disabled=safe_to_train_bool)
-    if train_bool:
+        train_bool = True
+
+    start_train = st.sidebar.button("Start Training Sequence", disabled=train_bool)
+    if start_train:
         history, model = train(compiled_model, x_train, y_train)
         st.write("Training log:")
         plot_history(history)
