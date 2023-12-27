@@ -12,7 +12,7 @@ encoder = LabelEncoder()
 @st.cache_data
 def load_dataset():
     df = pd.read_csv('winequality-white.csv', delimiter=';')
-    df['quality'] = scaler.fit_transform(df['quality'])
+    df['quality'] = encoder.fit_transform(df['quality'])
     y = df['quality']
     x = df.drop('quality', axis=1)
     x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
