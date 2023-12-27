@@ -57,15 +57,24 @@ if __name__ == "__main__":
     
     x, y = load_dataset(synthetic=synth_bool)
     x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
-    rf_classifier = RandomForestClassifier(
+
+    rfc = RandomForestClassifier(
         n_estimators=1024,
         #criterion="entropy",
         n_jobs=-1,
         random_state=random_state)
-    rf_classifier.fit(x_train, y_train)
-    y_pred = rf_classifier.predict(x_test)
-    score = rf_classifier.score(x_test, y_test)
     
+    param_grid = {
+        "max_features": ["sqrt", "log"],  
+        "min_samples_split": [1, 3, 5, 10],  
+        "min_samples_leaf": [1, 2],  
+        "n_estimators": [32, 64,4128, 256, 512, 1024]}
+    
+    model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=4)
+    print("Search done.")
+    model.fit(x_train, y_train)
+    print("Fit done.")
+    y_pred = model.predict(x_test)
     c1, c2, c3, c4 = st.columns(4, gap='small')
     with c1:
         st.header("Accuracy")
