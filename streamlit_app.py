@@ -57,7 +57,10 @@ if __name__ == "__main__":
     
     x, y = load_dataset(synthetic=synth_bool)
     x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
-    rf_classifier = RandomForestClassifier(n_jobs=2, random_state=0)
+    rf_classifier = RandomForestClassifier(
+        n_estimators=1024,
+        criterion="entropy"
+        n_jobs=2, random_state=0)
     rf_classifier.fit(x_train, y_train)
     y_pred = rf_classifier.predict(x_test)
     score = rf_classifier.score(x_test, y_test)
@@ -65,7 +68,7 @@ if __name__ == "__main__":
     c1, c2, c3, c4 = st.columns(4, gap='small')
     with c1:
         st.header("Accuracy")
-        st.write(metrics.accuracy_score(y_test, y_pred))
+        st.write(metrics.balanced_accuracy_score(y_test, y_pred))
     with c2:
         st.header("Percision")
         st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
