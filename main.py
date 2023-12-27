@@ -95,7 +95,7 @@ def mutli_model():
     y = df_wine['quality']
     # raise
     from sklearn.model_selection import train_test_split
-    X_train, X_test , y_train , y_test = train_test_split(X,y,test_size=0.2,random_state=42) # 80-20 split
+    X_train, X_test , y_train , y_test = train_test_split(X,y,test_size=0.2,random_state=42)
 
     # Checking split 
     print('X_train:', X_train.shape)
@@ -112,8 +112,11 @@ def mutli_model():
     rf_classifier.fit(X_train, y_train)
 
     y_pred = rf_classifier.predict(X_test)
+    score = rf_classifier.score(X_test, y_test)
 
     accuracy = metrics.accuracy_score(y_test, y_pred)
     f1_score = metrics.f1_score(y_test, y_pred, average="weighted")
-    print(f"Accuracy: {accuracy}")
+    print(f"Accuracy: {score}")
     print(f"F1 Score: {f1_score}")
+
+mutli_model()

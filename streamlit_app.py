@@ -53,14 +53,15 @@ if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
     st.write("Train a wine quality prediction model yourself!")
     synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
-    random_state    = st.sidebar.number_input("Random State:", min_value=1, max_value=None)
+    random_state    = st.number_input("Random State:", min_value=1, max_value=None)
     
     x, y = load_dataset(synthetic=synth_bool)
     x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
-    ready_bool  = st.sidebar.button("Train Model")
     rf_classifier = RandomForestClassifier(n_jobs=2, random_state=0)
     rf_classifier.fit(x_train, y_train)
     y_pred = rf_classifier.predict(x_test)
+    score = rf_classifier.score(x_test, y_test)
+    
     c1, c2, c3, c4 = st.columns(4, gap='small')
     with c1:
         st.header("Accuracy")
