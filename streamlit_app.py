@@ -67,10 +67,10 @@ if __name__ == "__main__":
         st.write(metrics.accuracy_score(y_test, y_pred))
     with c2:
         st.header("Percision")
-        st.write(metrics.precision_score(y_test, y_pred))
+        st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
     with c3:
         st.header("Recall")
-        st.write(metrics.recall_score(y_test, y_pred))
+        st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
     with c4:
         st.header("F1")
         st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
