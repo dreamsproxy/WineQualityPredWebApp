@@ -34,9 +34,9 @@ def plot_history(history):
         history.history,
         y=['loss', 'val_loss', 'accuracy', 'val_accuracy'],
         labels={'x': "Epoch", 'y': "Loss"},
-        title="Loss Over Time"
+        title="Training Log"
     )
-    st.plotly_chart(fig, theme="streamlit")
+    st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
 def split_dataset(x, y, train_size, state):
     x_train, x_test, y_train, y_test = train_test_split(
