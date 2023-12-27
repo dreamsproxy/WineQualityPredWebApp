@@ -27,7 +27,8 @@ def load_dataset(synthetic = True):
     y = df["quality"]
     x = df.drop("quality", axis=1)
     x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
-    
+    print(y.shape)
+    raise
     return df, x, y
 
 def get_correlation_heatmap(df):
@@ -132,12 +133,6 @@ if __name__ == "__main__":
         y_preds = model.predict(x_test)
         y_preds = pd.Series([int(np.argmax(row)) for row in y_preds], name='quality')
         f1_score = sklearn.metrics.f1_score(y_preds, y_test,average="weighted", zero_division='warn')
-        metric_results = pd.DataFrame(
-            {
-                "Eval Loss" : eval_result[0],
-                "Eval Accuracy" : eval_result[1],
-                "F1 Score" : f1_score
-            })
         c1, c2, c3 = st.columns(3, gap='small')
         with c1:
             st.header("Loss")
