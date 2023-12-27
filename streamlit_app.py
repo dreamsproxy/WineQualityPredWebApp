@@ -59,11 +59,7 @@ if __name__ == "__main__":
         x, y = load_dataset(synthetic=synth_bool)
         x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
 
-        rfc = RandomForestClassifier(
-            n_estimators=1024,
-            #criterion="entropy",
-            n_jobs=-1,
-            random_state=random_state)
+        rfc = RandomForestClassifier(random_state=random_state)
         
         param_grid = {
             "max_features": ["sqrt", "log"],  
