@@ -62,7 +62,7 @@ if __name__ == "__main__":
         rfc = RandomForestClassifier(random_state=random_state)
         
         param_grid = {
-            "max_features": ["sqrt", "log"],  
+            "max_features": ["sqrt", "log2"],  
             "n_estimators": [32, 64, 128, 256]}
         
         model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=5)
