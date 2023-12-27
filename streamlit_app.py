@@ -93,8 +93,8 @@ if __name__ == "__main__":
     random_state    = st.sidebar.number_input("Random State:", min_value=1, max_value=None)
     n_layers        = st.sidebar.number_input("Number of layers:", min_value=1, max_value=5)
     activation_func = st.sidebar.selectbox("Activation Function:", ("relu", "sigmoid", "exponential"))
-    batch_norm      = st.sidebar.selectbox("Batch Normalization:" ("True", "False"))
-    dropout_ratio   = st.sidebar.selectbox("Drop Out Ratio:" ["Do not use dropout"]+list(np.arange(start=0.1, stop=0.9, step=(0.05))))
+    batch_norm      = st.sidebar.selectbox("Batch Normalization:", ("True", "False"))
+    dropout_ratio   = st.sidebar.selectbox("Drop Out Ratio:", ["Do not use dropout"]+list(np.arange(start=0.1, stop=0.9, step=(0.05))))
 
     batch_size      = st.sidebar.selectbox('Batch Size:', (8, 16, 32, 64, 128, 256))
     epochs          = st.sidebar.number_input("Epochs:", min_value=1, max_value=500)
