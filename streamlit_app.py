@@ -29,6 +29,15 @@ def get_correlation_heatmap(df):
                     width=800, height=800, aspect="equal")
     st.plotly_chart(fig, theme="streamlit")
 
+def plot_history(history):
+    fig = px.line(
+        history.history,
+        y=['loss', 'val_loss', 'accuracy', 'val_accuracy'],
+        labels={'x': "Epoch", 'y': "Loss"},
+        title="Loss Over Time"
+    )
+    st.plotly_chart(fig, theme="streamlit")
+
 def split_dataset(x, y, train_size, state):
     x_train, x_test, y_train, y_test = train_test_split(
         x, y,train_size=train_size, random_state=state)
@@ -109,6 +118,7 @@ if __name__ == "__main__":
     
     if safe_to_train_bool:
         train_bool = st.sidebar.button("Start Training Sequence", disabled=safe_to_train_bool)
+    if train_bool:
         history, model = train(compiled_model, x_train, y_train)
         st.write("Training log:")
-        st.line_chart(history)
+        plot_history(history)
