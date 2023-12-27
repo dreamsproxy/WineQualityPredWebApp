@@ -79,7 +79,8 @@ if __name__ == "__main__":
         'Batch Size:',
         (8, 16, 32, 64, 128, 256)
     )
-    x_train, x_test, y_train, y_test = split_dataset(x, y)
+    st.text_input("")
+    x_train, x_test, y_train, y_test = split_dataset(x, y, 42)
     compiled_model = build_model(11, 7)
     train(compiled_model)
     st.line_chart()
