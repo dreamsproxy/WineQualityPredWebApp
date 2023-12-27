@@ -113,6 +113,8 @@ if __name__ == "__main__":
     if compile_bool:
         compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
         train_bool = True
+    elif not compile_bool:
+        train_bool = compile_bool
 
     start_train = st.sidebar.button("Start Training Sequence", disabled=train_bool)
     if start_train:
