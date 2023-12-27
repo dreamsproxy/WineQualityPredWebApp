@@ -91,7 +91,7 @@ def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch
     
     return model
 
-def train(model, x_train, y_train, batch_size = 32, epochs = 100):
+def train(model, x_train, y_train, batch_size:int, epochs: int):
     history = model.fit(
         x_train,
         y_train,
