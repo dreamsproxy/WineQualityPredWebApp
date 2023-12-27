@@ -5,7 +5,7 @@ import plotly.express as px
 import numpy as np
 import sklearn
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.ensemble import RandomForestClassifier
 from sklearn import metrics
 
@@ -59,9 +59,20 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
     rf_classifier = RandomForestClassifier(
         n_estimators=1024,
-        criterion="entropy",
-        n_jobs=2, random_state=0)
-    rf_classifier.fit(x_train, y_train)
+        #criterion="entropy",
+        n_jobs=-1,
+        random_state=random_state)
+    
+    param_grid = {
+        "max_depth": [3, 5,10, 15, 20],  
+        "max_features": [1, 3, 10, 15, 20],  
+        "min_samples_split": [1, 5, 10],  
+        "min_samples_leaf": [1, 5, 10],  
+        "n_estimators": [128, 256, 512]}
+    grid_search = GridSearchCV(rf_classifier, param_grid=param_grid, cv = 10)
+    grid_search.fit(x_train, y_train)
+    
+    rf_classifier = grid_search.transform(rf_classifier)
     y_pred = rf_classifier.predict(x_test)
     score = rf_classifier.score(x_test, y_test)
     
@@ -70,7 +81,7 @@ if __name__ == "__main__":
         st.header("Accuracy")
         st.write(metrics.balanced_accuracy_score(y_test, y_pred))
     with c2:
-        st.header("Avg. Percision")
+        st.header("Precision")
         st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
     with c3:
         st.header("Recall")
