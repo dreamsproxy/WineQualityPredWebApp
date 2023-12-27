@@ -53,38 +53,39 @@ if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
     st.write("Train a wine quality prediction model yourself!")
     synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
-    random_state    = st.number_input("Random State:", min_value=1, max_value=None)
-    
-    x, y = load_dataset(synthetic=synth_bool)
-    x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
+    random_state    = st.number_input("Random State:", min_value=42, max_value=None)
+    run_bool        = st.button("Run!")
+    if run_bool:
+        x, y = load_dataset(synthetic=synth_bool)
+        x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
 
-    rfc = RandomForestClassifier(
-        n_estimators=1024,
-        #criterion="entropy",
-        n_jobs=-1,
-        random_state=random_state)
-    
-    param_grid = {
-        "max_features": ["sqrt", "log"],  
-        "min_samples_split": [1, 3, 5, 10],  
-        "min_samples_leaf": [1, 2],  
-        "n_estimators": [32, 64, 128, 256]}
-    
-    model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=4)
-    print("Search done.")
-    model.fit(x_train, y_train)
-    print("Fit done.")
-    y_pred = model.predict(x_test)
-    c1, c2, c3, c4 = st.columns(4, gap='small')
-    with c1:
-        st.header("Accuracy")
-        st.write(metrics.accuracy_score(y_test, y_pred))
-    with c2:
-        st.header("Precision")
-        st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
-    with c3:
-        st.header("Recall")
-        st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
-    with c4:
-        st.header("F1")
-        st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
+        rfc = RandomForestClassifier(
+            n_estimators=1024,
+            #criterion="entropy",
+            n_jobs=-1,
+            random_state=random_state)
+        
+        param_grid = {
+            "max_features": ["sqrt", "log"],  
+            "min_samples_split": [1, 3, 5, 10],  
+            "min_samples_leaf": [1, 2],  
+            "n_estimators": [32, 64, 128, 256]}
+        
+        model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=4)
+        print("Search done.")
+        model.fit(x_train, y_train)
+        print("Fit done.")
+        y_pred = model.predict(x_test)
+        c1, c2, c3, c4 = st.columns(4, gap='small')
+        with c1:
+            st.header("Accuracy")
+            st.write(metrics.accuracy_score(y_test, y_pred))
+        with c2:
+            st.header("Precision")
+            st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
+        with c3:
+            st.header("Recall")
+            st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
+        with c4:
+            st.header("F1")
+            st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
