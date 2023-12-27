@@ -76,6 +76,12 @@ def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch
 
     outputs = tf.keras.layers.Dense(num_classes, activation="softmax")(x)
     model = tf.keras.Model(inputs=inputs, outputs=outputs)
+    adam = tf.keras.optimizers.Adam(
+        learning_rate=0.0008,
+        beta_1=0.5,
+        amsgrad = True,
+        name="Adam",
+    )
 
     model.compile(
         optimizer="adam",
@@ -115,7 +121,7 @@ if __name__ == "__main__":
     dropout_ratio   = st.sidebar.selectbox("Drop Out Ratio:", ["Do not use dropout"]+list(np.round(np.arange(start=0.1, stop=0.9, step=(0.05)), 2)), index=5)
 
     batch_size      = st.sidebar.selectbox("Batch Size:", (8, 16, 32, 64, 128, 256), index=2)
-    epochs          = st.sidebar.number_input("Epochs:", min_value=1, max_value=500, value=100)
+    epochs          = st.sidebar.number_input("Epochs:", min_value=1, max_value=1000, value=100)
     
     x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
     build_bool  = st.sidebar.button("Build and Train Model")
