@@ -73,7 +73,7 @@ if __name__ == "__main__":
         
         model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=4)
         print("Search done.")
-        model.fit(x_train, y_train)
+        model.best_estimator_.fit(x_train, y_train)
         print("Fit done.")
         y_pred = model.predict(x_test)
         c1, c2, c3, c4 = st.columns(4, gap='small')
