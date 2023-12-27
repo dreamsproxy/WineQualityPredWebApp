@@ -58,7 +58,6 @@ def build_model(num_features, num_classes):
     
     return model
 
-@st.cache_data
 def train(model, x_train, y_train, batch_size = 32, epochs = 100):
     history = model.fit(
         x_train,
