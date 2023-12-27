@@ -2,3 +2,4 @@ plotly
 seaborn
 tensorflow
 scikit-learn
+stqdm
