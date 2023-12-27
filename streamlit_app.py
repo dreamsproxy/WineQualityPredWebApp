@@ -59,7 +59,7 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
     rf_classifier = RandomForestClassifier(
         n_estimators=1024,
-        criterion="entropy"
+        criterion="entropy",
         n_jobs=2, random_state=0)
     rf_classifier.fit(x_train, y_train)
     y_pred = rf_classifier.predict(x_test)
@@ -70,8 +70,8 @@ if __name__ == "__main__":
         st.header("Accuracy")
         st.write(metrics.balanced_accuracy_score(y_test, y_pred))
     with c2:
-        st.header("Percision")
-        st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
+        st.header("Avg. Percision")
+        st.write(metrics.average_precision_score(y_test, y_pred, average="weighted"))
     with c3:
         st.header("Recall")
         st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
