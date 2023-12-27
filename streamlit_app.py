@@ -84,7 +84,7 @@ def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch
     )
 
     model.compile(
-        optimizer="adam",
+        optimizer=adam,
         loss="sparse_categorical_crossentropy",
         metrics=["accuracy"]
     )
