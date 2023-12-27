@@ -1,4 +1,4 @@
 plotly
 seaborn
 tensorflow
-sklearn
+scikit-learn
