@@ -116,6 +116,7 @@ if __name__ == "__main__":
     else:
         safe_to_train_bool = False
     
+    train_bool = False
     if safe_to_train_bool:
         train_bool = st.sidebar.button("Start Training Sequence", disabled=safe_to_train_bool)
     if train_bool:
