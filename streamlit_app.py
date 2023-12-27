@@ -100,7 +100,7 @@ if __name__ == "__main__":
     st.write("Train a wine quality prediction model yourself!")
     split_size      = st.sidebar.number_input("Train Ratio:", min_value=0.5, max_value=0.8)
     random_state    = st.sidebar.number_input("Random State:", min_value=1, max_value=None)
-    n_layers        = st.sidebar.number_input("Number of layers:", min_value=1, max_value=5)
+    n_layers        = st.sidebar.number_input("Number of layers:", min_value=2, max_value=5)
     activation_func = st.sidebar.selectbox("Activation Function:", ("relu", "sigmoid", "exponential"))
     batch_norm      = st.sidebar.selectbox("Batch Normalization:", ("True", "False"))
     dropout_ratio   = st.sidebar.selectbox("Drop Out Ratio:", ["Do not use dropout"]+list(np.round(np.arange(start=0.1, stop=0.9, step=(0.05)), 2)))
@@ -111,10 +111,10 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
     build_bool  = st.sidebar.button("Build model.")
     if build_bool:
-        train_button_lock = True
+        train_button_lock = False
         compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
     else:
-        train_button_lock = False
+        train_button_lock = True
 
     start_train = st.sidebar.button("Start Training Sequence", disabled=train_button_lock)
     if start_train:
