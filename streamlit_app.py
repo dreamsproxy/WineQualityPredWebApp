@@ -20,10 +20,10 @@ def load_dataset(synthetic: bool):
     else:
         df = pd.read_csv("winequality-white.csv", delimiter=";")
     
-    df["quality"] = encoder.fit_transform(df["quality"])
+    #df["quality"] = encoder.fit_transform(df["quality"])
     y = df["quality"]
     x = df.drop("quality", axis=1)
-    x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
+    #x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
     return  x, y
 
 def get_correlation_heatmap(df):
