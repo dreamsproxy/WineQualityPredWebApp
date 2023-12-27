@@ -68,7 +68,7 @@ if __name__ == "__main__":
         "min_samples_split": [1, 2, 3, 4, 5],  
         "min_samples_leaf": [1, 2],  
         "n_estimators": [128, 256, 512]}
-    model = GridSearchCV(rfc, param_grid=param_grid, cv = 10, n_jobs=-1)
+    model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=-1)
     print("Search done.")
     model.fit(x_train, y_train)
     print("Fit done.")
