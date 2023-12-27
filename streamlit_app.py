@@ -65,10 +65,10 @@ if __name__ == "__main__":
     
     param_grid = {
         "max_features": ["sqrt", "log"],  
-        "min_samples_split": [1, 2, 3, 4, 5],  
+        "min_samples_split": [1, 3, 5, 10],  
         "min_samples_leaf": [1, 2],  
-        "n_estimators": [128, 256, 512]}
-    model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=-1)
+        "n_estimators": [32, 64,4128, 256, 512, 1024]}
+    model = GridSearchCV(rfc, param_grid=param_grid, cv = 5, n_jobs=4)
     print("Search done.")
     model.fit(x_train, y_train)
     print("Fit done.")
