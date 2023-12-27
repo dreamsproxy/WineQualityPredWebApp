@@ -61,14 +61,16 @@ if __name__ == "__main__":
     rf_classifier = RandomForestClassifier(n_jobs=2, random_state=0)
     rf_classifier.fit(x_train, y_train)
     y_pred = rf_classifier.predict(x_test)
-    c1, c2, c3 = st.columns(3, gap='small')
+    c1, c2, c3, c4 = st.columns(4, gap='small')
     with c1:
         st.header("Accuracy")
         st.write(metrics.accuracy_score(y_test, y_pred))
     with c2:
-        st.header("Percision-Recall")
-        st.write(metrics.precision_recall_curve(y_test, y_pred))
-        print(metrics.precision_recall_curve(y_test, y_pred))
+        st.header("Percision")
+        st.write(metrics.precision_score(y_test, y_pred))
     with c3:
+        st.header("Recall")
+        st.write(metrics.recall_score(y_test, y_pred))
+    with c4:
         st.header("F1")
         st.write(metrics.f1_score(y_test, y_pred))
