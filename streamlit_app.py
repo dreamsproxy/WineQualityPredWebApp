@@ -18,7 +18,6 @@ encoder = LabelEncoder()
 def load_dataset(synthetic = True):
     if synthetic:
         df = pd.read_csv('synthetic_dataset.csv', delimiter=',')
-        df = df.drop('index', axis=1)
         print(df)
     else:
         df = pd.read_csv("winequality-white.csv", delimiter=";")
