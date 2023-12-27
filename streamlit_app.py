@@ -98,7 +98,7 @@ def train(model, x_train, y_train, batch_size = 32, epochs = 100):
         validation_split=0.3,
         batch_size=batch_size,
         epochs=epochs,
-        callbacks=[tf.keras.callbacks.ReduceLROnPlateau()]
+        callbacks=[tf.keras.callbacks.ReduceLROnPlateau(factor=0.8)]
     )
     return history, model
 
@@ -129,7 +129,7 @@ if __name__ == "__main__":
     if build_bool:
         with st.spinner("Hold on, model is training..."):
             compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
-            history, model = train(compiled_model, x_train, y_train)
+            history, model = train(compiled_model, x_train, y_train, epochs)
         st.success("Done!")
         st.write("Training log:")
         plot_history(history)
