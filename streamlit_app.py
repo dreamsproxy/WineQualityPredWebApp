@@ -64,12 +64,12 @@ if __name__ == "__main__":
         random_state=random_state)
     
     param_grid = {
-        "max_depth": [3, 5, 10, 15, 20, None],  
         "max_features": ["sqrt", "log"],  
         "min_samples_split": [1, 2, 3, 4, 5],  
-        "min_samples_leaf": [1, 5, 10],  
+        "min_samples_leaf": [1, 2],  
         "n_estimators": [128, 256, 512]}
-    model = GridSearchCV(rfc, param_grid=param_grid, cv = 10)
+    model = GridSearchCV(rfc, param_grid=param_grid, cv = 10, n_jobs=-1)
+    print("Search done.")
     model.fit(x_train, y_train)
 
     y_pred = model.predict(x_test)
