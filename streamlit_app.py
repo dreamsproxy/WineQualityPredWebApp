@@ -69,7 +69,7 @@ if __name__ == "__main__":
     c1, c2, c3, c4 = st.columns(4, gap='small')
     with c1:
         st.header("Accuracy")
-        st.write(metrics.balanced_accuracy_score(y_test, y_pred))
+        st.write(metrics.accuracy_score(y_test, y_pred))
     with c2:
         st.header("Precision")
         st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
