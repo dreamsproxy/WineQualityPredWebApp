@@ -106,7 +106,7 @@ def download_model(model):
 if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
     df, x, y = load_dataset(synthetic=True)
-    print(y.shape)
+    st.write(y.shape)
     raise
     #get_correlation_heatmap(df)
     st.write("Train a wine quality prediction model yourself!")
