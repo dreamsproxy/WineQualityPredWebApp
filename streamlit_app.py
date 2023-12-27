@@ -100,8 +100,15 @@ if __name__ == "__main__":
     epochs          = st.sidebar.number_input("Epochs:", min_value=1, max_value=500)
     
     x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
-    compiled_model  = st.sidebar.button("Build model.", on_click=build_model, args=(11, 7, n_layers, activation_func, batch_norm, dropout_ratio))
+    compile_bool  = st.sidebar.button("Build model.")
+    if compile_bool:
+        compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
+        safe_to_train_bool = True
+    else:
+        safe_to_train_bool = False
     
-    history, model  = st.sidebar.button("Start Training Sequence", on_click=train(compiled_model, x_train, y_train))
+    if safe_to_train_bool:
+        train_bool = st.sidebar.button("Start Training Sequence", disabled=safe_to_train_bool)
+        history, model = train(compiled_model, x_train, y_train)
     st.write("Training log:")
     st.line_chart(history)
