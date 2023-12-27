@@ -15,7 +15,7 @@ scaler = StandardScaler()
 encoder = LabelEncoder()
 
 @st.cache_data
-def load_dataset(synthetic = True):
+def load_dataset(synthetic: bool):
     if synthetic:
         df = pd.read_csv('synthetic_dataset.csv', delimiter=',')
         print(df)
@@ -110,7 +110,7 @@ def download_model(model):
 
 if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
-    synth_bool      = st.sidebar.selectbox("USe Synthetic:", ("True", "False"), index=1)
+    synth_bool      = st.sidebar.selectbox("USe Synthetic:", (True, False), index=1)
     df, x, y = load_dataset(synthetic=synth_bool)
     #get_correlation_heatmap(df)
     st.write("Train a wine quality prediction model yourself!")
