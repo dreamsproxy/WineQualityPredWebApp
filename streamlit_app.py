@@ -111,10 +111,10 @@ if __name__ == "__main__":
     x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
     build_bool  = st.sidebar.button("Build model.")
     if build_bool:
-        train_button_lock = False
+        train_button_lock = True
         compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
     else:
-        train_button_lock = True
+        train_button_lock = False
 
     start_train = st.sidebar.button("Start Training Sequence", disabled=train_button_lock)
     if start_train:
