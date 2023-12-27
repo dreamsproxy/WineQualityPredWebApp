@@ -129,7 +129,7 @@ if __name__ == "__main__":
     if build_bool:
         with st.spinner("Hold on, model is training..."):
             compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
-            history, model = train(compiled_model, x_train, y_train, epochs)
+            history, model = train(compiled_model, x_train, y_train, batch_size, epochs)
         st.success("Done!")
         st.write("Training log:")
         plot_history(history)
