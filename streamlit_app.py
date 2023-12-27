@@ -17,7 +17,7 @@ encoder = LabelEncoder()
 @st.cache_data
 def load_dataset(synthetic = True):
     if synthetic:
-        df = pd.read_csv('tabular-actgan-SYNTHETIC.csv', delimiter=';')
+        df = pd.read_csv('synthetic_dataset.csv', delimiter=',')
     else:
         df = pd.read_csv("winequality-white.csv", delimiter=";")
     g = df.groupby('quality')
@@ -106,8 +106,6 @@ def download_model(model):
 if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
     df, x, y = load_dataset(synthetic=True)
-    st.write(y.shape)
-    raise
     #get_correlation_heatmap(df)
     st.write("Train a wine quality prediction model yourself!")
     split_size      = st.sidebar.number_input("Train Ratio:", min_value=0.5, max_value=0.8)
