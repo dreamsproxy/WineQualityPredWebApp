@@ -95,7 +95,7 @@ def train(model, x_train, y_train, batch_size = 32, epochs = 100):
     history = model.fit(
         x_train,
         y_train,
-        validation_split=0.2,
+        validation_split=0.3,
         batch_size=batch_size,
         epochs=epochs,
         callbacks=[tf.keras.callbacks.ReduceLROnPlateau()]
@@ -110,7 +110,8 @@ def download_model(model):
 
 if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
-    df, x, y = load_dataset(synthetic=True)
+    synth_bool      = st.sidebar.selectbox("USe Synthetic:", ("True", "False"), index=1)
+    df, x, y = load_dataset(synthetic=synth_bool)
     #get_correlation_heatmap(df)
     st.write("Train a wine quality prediction model yourself!")
     split_size      = st.sidebar.number_input("Train Ratio:", value = 0.7, min_value=0.5, max_value=0.8)
