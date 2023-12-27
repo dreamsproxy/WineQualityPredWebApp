@@ -81,5 +81,5 @@ if __name__ == "__main__":
     st.text_input("")
     x_train, x_test, y_train, y_test = split_dataset(x, y, 42)
     compiled_model = build_model(11, 7)
-    train(compiled_model)
+    train(compiled_model, x_train, y_train)
     st.line_chart()
