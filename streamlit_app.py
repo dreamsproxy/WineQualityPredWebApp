@@ -20,10 +20,14 @@ def load_dataset(synthetic = True):
         df = pd.read_csv('tabular-actgan-SYNTHETIC.csv', delimiter=';')
     else:
         df = pd.read_csv("winequality-white.csv", delimiter=";")
+    g = data.groupby('quality')
+    g.apply(lambda x: x.sample(g.size().min()).reset_index(drop=True))
+    data = pd.DataFrame(g.apply(lambda x: x.sample(g.size().min()).reset_index(drop=True)))
     df["quality"] = encoder.fit_transform(df["quality"])
     y = df["quality"]
     x = df.drop("quality", axis=1)
     x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
+    
     return df, x, y
 
 def get_correlation_heatmap(df):
