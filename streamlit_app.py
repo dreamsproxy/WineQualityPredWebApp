@@ -131,5 +131,15 @@ if __name__ == "__main__":
                 "Eval Accuracy" : eval_result[1],
                 "F1 Score" : f1_score
             })
-        st.table(metric_results)
+        c1, c2, c3 = st.columns(3, gap='small')
+        with c1:
+            st.header("Loss")
+            st.write(eval_result[0])
+        with c2:
+            st.header("Accuracy")
+            st.write(eval_result[1])
+        with c1:
+            st.header("F1")
+            st.write(f1_score)
 
+        
