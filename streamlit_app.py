@@ -28,7 +28,6 @@ def load_dataset(synthetic = True):
     x = df.drop("quality", axis=1)
     x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
     print(y.shape)
-    raise
     return df, x, y
 
 def get_correlation_heatmap(df):
@@ -107,6 +106,7 @@ def download_model(model):
 if __name__ == "__main__":
     st.title("White Wine Quality Prediction")
     df, x, y = load_dataset(synthetic=True)
+    raise
     #get_correlation_heatmap(df)
     st.write("Train a wine quality prediction model yourself!")
     split_size      = st.sidebar.number_input("Train Ratio:", min_value=0.5, max_value=0.8)
