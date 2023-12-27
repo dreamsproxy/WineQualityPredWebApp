@@ -66,7 +66,7 @@ if __name__ == "__main__":
     param_grid = {
         "max_depth": [3, 5,10, 15, 20],  
         "max_features": [1, 3, 10, 15, 20],  
-        "min_samples_split": [1, 5, 10],  
+        "min_samples_split": [1, 2, 3, 4, 5],  
         "min_samples_leaf": [1, 5, 10],  
         "n_estimators": [128, 256, 512]}
     model = GridSearchCV(rfc, param_grid=param_grid, cv = 10)
