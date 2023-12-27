@@ -63,9 +63,9 @@ if __name__ == "__main__":
         
         param_grid = {
             "max_features": ["sqrt", "log2"],  
-            "n_estimators": [32, 64, 128, 256]}
+            "n_estimators": [128, 256, 512, 1024]}
         
-        model = GridSearchCV(rfc, param_grid=param_grid, cv = 10, n_jobs=5)
+        model = GridSearchCV(rfc, param_grid=param_grid, cv = 10, n_jobs=4)
         print("Search done.")
         model.fit(x_train, y_train)
         print("Fit done.")
