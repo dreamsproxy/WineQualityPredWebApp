@@ -22,9 +22,9 @@ def load_dataset(synthetic = True):
         print(df)
     else:
         df = pd.read_csv("winequality-white.csv", delimiter=";")
-    g = df.groupby('quality')
-    g.apply(lambda x: x.sample(g.size().min()).reset_index(drop=True))
-    df = pd.DataFrame(g.apply(lambda x: x.sample(g.size().min()).reset_index(drop=True)))
+    #g = df.groupby('quality')
+    #g.apply(lambda x: x.sample(g.size().min()).reset_index(drop=True))
+    #df = pd.DataFrame(g.apply(lambda x: x.sample(g.size().min()).reset_index(drop=True)))
     df["quality"] = encoder.fit_transform(df["quality"])
     y = df["quality"]
     x = df.drop("quality", axis=1)
