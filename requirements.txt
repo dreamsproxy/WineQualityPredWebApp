@@ -3,3 +3,4 @@ seaborn
 tensorflow
 scikit-learn
 stqdm
+scipy
