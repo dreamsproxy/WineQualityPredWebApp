@@ -17,10 +17,10 @@ encoder = LabelEncoder()
 
 @st.cache_data
 def load_dataset():
-    df = pd.read_csv('winequality-white.csv', delimiter=';')
-    df['quality'] = encoder.fit_transform(df['quality'])
-    y = df['quality']
-    x = df.drop('quality', axis=1)
+    df = pd.read_csv("winequality-white.csv", delimiter=";")
+    df["quality"] = encoder.fit_transform(df["quality"])
+    y = df["quality"]
+    x = df.drop("quality", axis=1)
     x = pd.DataFrame(scaler.fit_transform(x), columns=x.columns)
     return df, x, y
 
@@ -34,8 +34,8 @@ def get_correlation_heatmap(df):
 def plot_history(history):
     fig = px.line(
         history.history,
-        y=['loss', 'val_loss', 'accuracy', 'val_accuracy'],
-        labels={'x': "Epoch", 'y': "Loss"},
+        y=["loss", "val_loss", "accuracy", "val_accuracy"],
+        labels={"x": "Epoch", "y": "Loss"},
         title="Training Log"
     )
     st.plotly_chart(fig, theme="streamlit", use_container_width=True)
@@ -67,13 +67,13 @@ def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch
             if isinstance(dropout_ratio, float):
                 x = tf.keras.layers.Dropout(dropout_ratio)(x)
 
-    outputs = tf.keras.layers.Dense(num_classes, activation='softmax')(x)
+    outputs = tf.keras.layers.Dense(num_classes, activation="softmax")(x)
     model = tf.keras.Model(inputs=inputs, outputs=outputs)
 
     model.compile(
-        optimizer='adam',
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy']
+        optimizer="adam",
+        loss="sparse_categorical_crossentropy",
+        metrics=["accuracy"]
     )
     
     return model
@@ -92,7 +92,7 @@ def train(model, x_train, y_train, batch_size = 32, epochs = 100):
 def download_model(model):
     output_model = pickle.dumps(model)
     b64 = base64.b64encode(output_model).decode()
-    href = f'<a href="data:file/output_model;base64,{b64}">Download Trained Model .pkl File</a> (right-click and save as &lt;some_name&gt;.pkl)'
+    href = f"<a href='data:file/output_model;base64,{b64}'>Download Trained Model .pkl File</a> (right-click and save as &lt;some_name&gt;.pkl)"
     st.markdown(href, unsafe_allow_html=True)
 
 if __name__ == "__main__":
@@ -107,14 +107,15 @@ if __name__ == "__main__":
     batch_norm      = st.sidebar.selectbox("Batch Normalization:", ("True", "False"))
     dropout_ratio   = st.sidebar.selectbox("Drop Out Ratio:", ["Do not use dropout"]+list(np.round(np.arange(start=0.1, stop=0.9, step=(0.05)), 2)))
 
-    batch_size      = st.sidebar.selectbox('Batch Size:', (8, 16, 32, 64, 128, 256))
+    batch_size      = st.sidebar.selectbox("Batch Size:", (8, 16, 32, 64, 128, 256))
     epochs          = st.sidebar.number_input("Epochs:", min_value=1, max_value=500)
     
     x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
     build_bool  = st.sidebar.button("Build and Train Model")
-    st.progress(value, text=None)
     if build_bool:
-        compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
-        history, model = train(compiled_model, x_train, y_train)
+        with st.spinner("Hold on, model is training..."):
+            compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
+            history, model = train(compiled_model, x_train, y_train)
+        st.success("Done!")
         st.write("Training log:")
         plot_history(history)
