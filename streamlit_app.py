@@ -3,14 +3,13 @@ import pandas as pd
 import plotly.express as px
 
 import numpy as np
+import sklearn
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 from sklearn.model_selection import train_test_split
 import tensorflow as tf
 
 import pickle
 import base64
-
-import stqdm
 
 scaler = StandardScaler()
 encoder = LabelEncoder()
@@ -36,7 +35,9 @@ def plot_history(history):
         history.history,
         y=["loss", "val_loss", "accuracy", "val_accuracy"],
         labels={"x": "Epoch", "y": "Loss"},
-        title="Training Log"
+        title="Training Log",
+        width=1080,
+        height=800
     )
     st.plotly_chart(fig, theme="streamlit", use_container_width=True)
 
@@ -119,3 +120,16 @@ if __name__ == "__main__":
         st.success("Done!")
         st.write("Training log:")
         plot_history(history)
+        metric = tf.keras.metrics.F1Score(threshold=0.5)
+        eval_result = model.evaluate(x_test, y_test)
+        y_preds = model.predict(x_test)
+        y_preds = pd.Series([int(np.argmax(row)) for row in y_preds], name='quality')
+        f1_score = sklearn.metrics.f1_score(y_preds, y_test,average="weighted", zero_division='warn')
+        metric_results = pd.DataFrame(
+            {
+                "Eval Loss" : eval_result[0],
+                "Eval Accuracy" : eval_result[1],
+                "F1 Score" : f1_score
+            })
+        st.table(metric_results)
+
