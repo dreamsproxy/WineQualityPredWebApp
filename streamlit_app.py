@@ -73,4 +73,4 @@ if __name__ == "__main__":
         st.write(metrics.recall_score(y_test, y_pred))
     with c4:
         st.header("F1")
-        st.write(metrics.f1_score(y_test, y_pred))
+        st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
