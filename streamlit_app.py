@@ -110,5 +110,5 @@ if __name__ == "__main__":
     if safe_to_train_bool:
         train_bool = st.sidebar.button("Start Training Sequence", disabled=safe_to_train_bool)
         history, model = train(compiled_model, x_train, y_train)
-    st.write("Training log:")
-    st.line_chart(history)
+        st.write("Training log:")
+        st.line_chart(history)
