@@ -71,7 +71,7 @@ if __name__ == "__main__":
         st.write(metrics.balanced_accuracy_score(y_test, y_pred))
     with c2:
         st.header("Avg. Percision")
-        st.write(metrics.average_precision_score(y_test, y_pred, average="weighted"))
+        st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
     with c3:
         st.header("Recall")
         st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
