@@ -107,15 +107,11 @@ def mutli_model():
     from sklearn.ensemble import RandomForestClassifier
     from sklearn import metrics
 
-    # Create a random forest Classifier
     rf_classifier = RandomForestClassifier(n_jobs=2, random_state=0)
 
-    # Train the Classifier/fitting the model
     rf_classifier.fit(X_train, y_train)
 
-    # predict the response
     y_pred = rf_classifier.predict(X_test)
-    acc_rf = round(rf_classifier.score(X_test,y_test) * 100, 2)
 
     accuracy = metrics.accuracy_score(y_test, y_pred)
     f1_score = metrics.f1_score(y_test, y_pred, average="weighted")
