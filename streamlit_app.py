@@ -48,7 +48,7 @@ def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch
     for i, k_size in enumerate(layer_sizes):
         if i == 0:
             # First layer -> handle input
-            x = tf.keras.layers.Dense(k_size, activation=activ_func)(layer_sizes)
+            x = tf.keras.layers.Dense(k_size, activation=activ_func)(inputs)
         else:
             x = tf.keras.layers.Dense(k_size, activation=activ_func)(x)
             if batch_norm:
