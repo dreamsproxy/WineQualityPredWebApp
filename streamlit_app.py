@@ -68,6 +68,7 @@ if __name__ == "__main__":
     with c2:
         st.header("Percision-Recall")
         st.write(metrics.precision_recall_curve(y_test, y_pred))
+        print(metrics.precision_recall_curve(y_test, y_pred))
     with c3:
         st.header("F1")
         st.write(metrics.f1_score(y_test, y_pred))
