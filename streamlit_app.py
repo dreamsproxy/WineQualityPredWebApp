@@ -60,7 +60,7 @@ def split_dataset(x, y, train_size, state):
 def RandomForest():
     import streamlit as st
     RF_run_lock = False
-    RF_run_bool = st.button("Run!", disabled=RF_run_lock)
+    RF_run_bool = st.button("Run RForest!", disabled=RF_run_lock)
     if RF_run_bool:
         RF_run_lock = True
         x, y = load_dataset(synthetic=synth_bool)
@@ -90,7 +90,7 @@ def GradientBoosting():
     st.write("By ProxyDreams (Alan) CC0 1.0")
     st.link_button("GitHub", url="https://github.com/dreamsproxy/")
     GB_run_lock     = False
-    GB_run_bool     = st.button("Run!", disabled=GB_run_lock)
+    GB_run_bool     = st.button("Run GBoost!", disabled=GB_run_lock)
     if GB_run_bool:
         GB_run_lock = True
         x, y = load_dataset(synthetic=synth_bool)
@@ -188,7 +188,9 @@ def NeuralNetwork():
 
     data_ready_lock = False
     data_ready = st.button("Build Dataset", disabled=data_ready_lock)
-    build_lock = False
+    if data_ready:
+        data_ready_lock = True
+        build_lock = False
     build_bool  = st.sidebar.button("Build and Train Model", disabled=build_lock)
     if data_ready:
         data_ready_lock = True
@@ -217,6 +219,7 @@ def NeuralNetwork():
                 st.header("F1")
                 st.write(metrics.f1_score(y_test, y_pred, average="weighted", zero_division='warn'))
             build_lock = False
+            data_ready_lock = False
             st.header("Training log:")
             plot_history(history)
 
