@@ -187,6 +187,7 @@ def NeuralNetwork():
     build_lock = True
     data_ready_lock = False
     data_ready = st.button("Build Dataset", disabled=data_ready_lock)
+    
     if data_ready:
         data_ready_lock = True
         build_lock = False
