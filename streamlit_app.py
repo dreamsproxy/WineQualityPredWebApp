@@ -59,6 +59,9 @@ def split_dataset(x, y, train_size, state):
 
 def RandomForest():
     import streamlit as st
+    st.write("By ProxyDreams (Alan) CC0 1.0")
+    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
+    st.write()
     synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
     random_state    = st.number_input("Random State:", min_value=42, max_value=None)
     run_bool        = st.button("Run!")
@@ -86,6 +89,8 @@ def RandomForest():
 
 def GradientBoosting():
     import streamlit as st
+    st.write("By ProxyDreams (Alan) CC0 1.0")
+    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
     synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
     random_state    = st.number_input("Random State:", min_value=42, max_value=None)
     run_bool        = st.button("Run!")
@@ -113,6 +118,8 @@ def GradientBoosting():
 
 def NeuralNetwork():
     import streamlit as st
+    st.write("By ProxyDreams (Alan) CC0 1.0")
+    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
     def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch_norm: bool, dropout_ratio):
         inputs = tf.keras.Input(shape=(num_features,))
         
@@ -217,6 +224,8 @@ def NeuralNetwork():
 
 def MainPage():
     import streamlit as st
+    st.write("By ProxyDreams (Alan) CC0 1.0")
+    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
     st.title("White Wine Quality Prediction")
     st.write("This web app shows 3 different methods to predict wine quality.")
     st.write("The dataset is UNBALANCED")
@@ -229,14 +238,12 @@ def MainPage():
         st.button("Gradient Boosting Classifier", use_container_width=True, on_click=MainPage)
 
 if __name__ == "__main__":
-    pages = {
-        "Home" : MainPage,
-        "Random Forest":RandomForest,
-        "Gradient Boosting": GradientBoosting
-    }
-    st.write("By ProxyDreams (Alan)")
+    st.write("By ProxyDreams (Alan) CC0 1.0")
     st.link_button("GitHub", url="https://github.com/dreamsproxy/")
-    st.sidebar.button("Home", use_container_width=True, on_click=RandomForest)
+    st.title("White Wine Quality Prediction")
+    st.write("This web app shows 3 different methods to predict wine quality.")
+    st.write("The dataset is UNBALANCED")
+    st.sidebar.button("Home", use_container_width=True, on_click=MainPage)
     st.sidebar.button("Random Forest Classifier", use_container_width=True, on_click=RandomForest)
     st.sidebar.button("Dense Neural Network Classifier", use_container_width=True, on_click=NeuralNetwork)
     st.sidebar.button("Gradient Boosting Classifier", use_container_width=True, on_click=GradientBoosting)
