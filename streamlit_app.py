@@ -171,7 +171,7 @@ def NeuralNetwork():
         st.markdown(href, unsafe_allow_html=True)
 
     st.write("## Dense Neural Network Prediction")
-    df, x, y = load_dataset(synthetic=True)
+    x, y = load_dataset(synthetic=True)
     #get_correlation_heatmap(df)
     st.write("Set parameters:")
     dataset_params, model_params = st.columns(2)
