@@ -186,6 +186,7 @@ def NeuralNetwork():
         dropout_ratio   = st.selectbox("Drop Out Ratio:", ["Do not use dropout"]+list(np.round(np.arange(start=0.1, stop=0.9, step=(0.05)), 2)), index=5)
         epochs          = st.number_input("Epochs:", min_value=1, max_value=500, value=100)
 
+    build_lock = True
     data_ready_lock = False
     data_ready = st.button("Build Dataset", disabled=data_ready_lock)
     if data_ready:
