@@ -224,20 +224,16 @@ def NeuralNetwork():
             st.header("Training log:")
             plot_history(history)
 
-def MainPage():
-    import streamlit as st
-    st.write("By ProxyDreams (Alan) CC0 1.0")
-    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
-    st.title("White Wine Quality Prediction")
-    st.write("This web app shows 3 different methods to predict wine quality.")
-    st.write("The dataset is UNBALANCED")
 
 if __name__ == "__main__":
     st.write("By ProxyDreams (Alan) CC0 1.0")
     st.link_button("GitHub", url="https://github.com/dreamsproxy/")
+
+    st.title("White Wine Quality Prediction")
+    st.write("This web app shows 3 different methods to predict wine quality.")
+    st.write("The dataset is UNBALANCED")
     synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
     random_state    = st.number_input("Random State:", min_value=42, max_value=None)
-    MainPage()
     RandomForest()
     NeuralNetwork()
     GradientBoosting()
