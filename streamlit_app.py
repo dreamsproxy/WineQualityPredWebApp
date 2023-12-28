@@ -229,21 +229,10 @@ def MainPage():
     st.title("White Wine Quality Prediction")
     st.write("This web app shows 3 different methods to predict wine quality.")
     st.write("The dataset is UNBALANCED")
-    forest, gboost, dense = st.columns(3, gap='small')
-    with forest:
-        st.button("Random Forest Classifier", use_container_width=True, on_click=RandomForest)
-    with dense:
-        st.button("Dense Neural Network Classifier", use_container_width=True, on_click=NeuralNetwork)
-    with gboost:
-        st.button("Gradient Boosting Classifier", use_container_width=True, on_click=MainPage)
-
-if __name__ == "__main__":
-    st.write("By ProxyDreams (Alan) CC0 1.0")
-    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
-    st.title("White Wine Quality Prediction")
-    st.write("This web app shows 3 different methods to predict wine quality.")
-    st.write("The dataset is UNBALANCED")
     st.sidebar.button("Home", use_container_width=True, on_click=MainPage)
     st.sidebar.button("Random Forest Classifier", use_container_width=True, on_click=RandomForest)
     st.sidebar.button("Dense Neural Network Classifier", use_container_width=True, on_click=NeuralNetwork)
     st.sidebar.button("Gradient Boosting Classifier", use_container_width=True, on_click=GradientBoosting)
+
+if __name__ == "__main__":
+    MainPage()
