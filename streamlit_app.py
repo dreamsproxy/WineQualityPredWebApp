@@ -87,8 +87,6 @@ def RandomForest():
 
 def GradientBoosting():
     import streamlit as st
-    st.write("By ProxyDreams (Alan) CC0 1.0")
-    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
     GB_run_lock     = False
     GB_run_bool     = st.button("Run GBoost!", disabled=GB_run_lock)
     if GB_run_bool:
