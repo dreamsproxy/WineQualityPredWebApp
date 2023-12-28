@@ -94,7 +94,7 @@ def GradientBoosting():
         x, y = load_dataset(synthetic=synth_bool)
         x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
 
-        model = GradientBoostingClassifier(random_state=random_state, n_estimators=64, max_features="sqrt", n_jobs=4)
+        model = GradientBoostingClassifier(random_state=random_state, n_estimators=64, max_features="sqrt")
 
         model.fit(x_train, y_train)
         y_pred = model.predict(x_test)
@@ -184,44 +184,35 @@ def NeuralNetwork():
         dropout_ratio   = st.selectbox("Drop Out Ratio:", ["Do not use dropout"]+list(np.round(np.arange(start=0.1, stop=0.9, step=(0.05)), 2)), index=5)
         epochs          = st.number_input("Epochs:", min_value=1, max_value=500, value=100)
 
-    build_lock = True
-    data_ready_lock = False
-    data_ready = st.button("Build Dataset", disabled=data_ready_lock)
-    
-    if data_ready:
-        data_ready_lock = True
-        build_lock = False
+    build_lock = False
     build_bool  = st.button("Build and Train Model", disabled=build_lock)
-    if data_ready:
-        data_ready_lock = True
-        x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
-        if build_bool:
-            build_lock = True
-            with st.spinner("Hold on, model is training..."):
-                compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
-                history, model = train(compiled_model, x_train, y_train, batch_size, epochs)
-            st.success("Done!")
-            eval_result = model.evaluate(x_test, y_test)
-            y_pred = model.predict(x_test)
-            y_pred = pd.Series([int(np.argmax(row)) for row in y_pred], name='quality')
-            #f1_score = sklearn.metrics.f1_score(y_pred, y_test,average="weighted", zero_division='warn')
-            c1, c2, c3, c4, c5 = st.columns(5, gap='small')
-            with c1:
-                st.header("Accuracy")
-                st.write(metrics.accuracy_score(y_test, y_pred))
-            with c2:
-                st.header("Precision")
-                st.write(metrics.precision_score(y_test, y_pred, average="weighted", zero_division='warn'))
-            with c3:
-                st.header("Recall")
-                st.write(metrics.recall_score(y_test, y_pred, average="weighted", zero_division='warn'))
-            with c4:
-                st.header("F1")
-                st.write(metrics.f1_score(y_test, y_pred, average="weighted", zero_division='warn'))
-            build_lock = False
-            data_ready_lock = False
-            st.header("Training log:")
-            plot_history(history)
+    x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
+    if build_bool:
+        build_lock = True
+        with st.spinner("Hold on, model is training..."):
+            compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
+            history, model = train(compiled_model, x_train, y_train, batch_size, epochs)
+        st.success("Done!")
+        eval_result = model.evaluate(x_test, y_test)
+        y_pred = model.predict(x_test)
+        y_pred = pd.Series([int(np.argmax(row)) for row in y_pred], name='quality')
+        #f1_score = sklearn.metrics.f1_score(y_pred, y_test,average="weighted", zero_division='warn')
+        c1, c2, c3, c4, c5 = st.columns(5, gap='small')
+        with c1:
+            st.header("Accuracy")
+            st.write(metrics.accuracy_score(y_test, y_pred))
+        with c2:
+            st.header("Precision")
+            st.write(metrics.precision_score(y_test, y_pred, average="weighted", zero_division='warn'))
+        with c3:
+            st.header("Recall")
+            st.write(metrics.recall_score(y_test, y_pred, average="weighted", zero_division='warn'))
+        with c4:
+            st.header("F1")
+            st.write(metrics.f1_score(y_test, y_pred, average="weighted", zero_division='warn'))
+        build_lock = False
+        st.header("Training log:")
+        plot_history(history)
 
 
 if __name__ == "__main__":
