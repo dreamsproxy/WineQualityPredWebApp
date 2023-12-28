@@ -234,4 +234,8 @@ def MainPage():
     st.sidebar.button("Dense Neural Network Classifier", use_container_width=True, on_click=NeuralNetwork)
     st.sidebar.button("Gradient Boosting Classifier", use_container_width=True, on_click=GradientBoosting)
 
-MainPage()
+if __name__ == "__main__":
+    MainPage()
+    RandomForest()
+    NeuralNetwork()
+    GradientBoosting()
