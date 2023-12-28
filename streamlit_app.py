@@ -68,6 +68,8 @@ def split_dataset(x, y, train_size, state):
 
 def RandomForest():
     import streamlit as st
+    st.markdown("---")
+    st.write("### Random Forest Prediction")
     RF_run_lock = False
     RF_run_bool = st.button("Run RForest!", disabled=RF_run_lock)
     if RF_run_bool:
@@ -96,6 +98,8 @@ def RandomForest():
 
 def GradientBoosting():
     import streamlit as st
+    st.markdown("---")
+    st.write("### Gradient Boosting Prediction")
     GB_run_lock     = False
     GB_run_bool     = st.button("Run GBoost!", disabled=GB_run_lock)
     if GB_run_bool:
@@ -174,8 +178,8 @@ def NeuralNetwork():
         b64 = base64.b64encode(output_model).decode()
         href = f"<a href='data:file/output_model;base64,{b64}'>Download Trained Model .pkl File</a> (right-click and save as &lt;some_name&gt;.pkl)"
         st.markdown(href, unsafe_allow_html=True)
-
-    st.write("## Dense Neural Network Prediction")
+    st.markdown("---")
+    st.write("### Dense Neural Network Prediction")
     x, y = load_dataset(synthetic=True)
     #get_correlation_heatmap(df)
     st.write("Set parameters:")
@@ -229,6 +233,7 @@ if __name__ == "__main__":
     st.link_button("GitHub", url="https://github.com/dreamsproxy/")
 
     st.title("White Wine Quality Prediction")
+    st.markdown("---")
     st.write("This web app shows 3 different methods to predict wine quality.")
     st.write("The dataset is UNBALANCED")
     synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
