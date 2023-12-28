@@ -59,13 +59,10 @@ def split_dataset(x, y, train_size, state):
 
 def RandomForest():
     import streamlit as st
-    st.write("By ProxyDreams (Alan) CC0 1.0")
-    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
-    st.write()
-    synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
-    random_state    = st.number_input("Random State:", min_value=42, max_value=None)
-    run_bool        = st.button("Run!")
-    if run_bool:
+    RF_run_lock = False
+    RF_run_bool = st.button("Run!", disabled=RF_run_lock)
+    if RF_run_bool:
+        RF_run_lock = True
         x, y = load_dataset(synthetic=synth_bool)
         x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
 
@@ -86,15 +83,16 @@ def RandomForest():
         with c4:
             st.header("F1")
             st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
+        RF_run_lock = False
 
 def GradientBoosting():
     import streamlit as st
     st.write("By ProxyDreams (Alan) CC0 1.0")
     st.link_button("GitHub", url="https://github.com/dreamsproxy/")
-    synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
-    random_state    = st.number_input("Random State:", min_value=42, max_value=None)
-    run_bool        = st.button("Run!")
-    if run_bool:
+    GB_run_lock     = False
+    GB_run_bool     = st.button("Run!", disabled=GB_run_lock)
+    if GB_run_bool:
+        GB_run_lock = True
         x, y = load_dataset(synthetic=synth_bool)
         x_train, x_test, y_train, y_test = split_dataset(x, y, 0.2, random_state)
 
@@ -115,11 +113,11 @@ def GradientBoosting():
         with c4:
             st.header("F1")
             st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
+        GB_run_lock = False
 
 def NeuralNetwork():
     import streamlit as st
-    st.write("By ProxyDreams (Alan) CC0 1.0")
-    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
+    
     def build_model(num_features, num_classes, n_layers: int, activ_func: str, batch_norm: bool, dropout_ratio):
         inputs = tf.keras.Input(shape=(num_features,))
         
@@ -196,7 +194,7 @@ def NeuralNetwork():
         data_ready_lock = True
         x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
         if build_bool:
-            build_lock = False
+            build_lock = True
             with st.spinner("Hold on, model is training..."):
                 compiled_model = build_model(11, 7, n_layers, activation_func, batch_norm, dropout_ratio)
                 history, model = train(compiled_model, x_train, y_train, batch_size, epochs)
@@ -218,7 +216,7 @@ def NeuralNetwork():
             with c4:
                 st.header("F1")
                 st.write(metrics.f1_score(y_test, y_pred, average="weighted", zero_division='warn'))
-            build_lock = True
+            build_lock = False
             st.header("Training log:")
             plot_history(history)
 
@@ -235,6 +233,10 @@ def MainPage():
     st.sidebar.button("Gradient Boosting Classifier", use_container_width=True, on_click=GradientBoosting)
 
 if __name__ == "__main__":
+    st.write("By ProxyDreams (Alan) CC0 1.0")
+    st.link_button("GitHub", url="https://github.com/dreamsproxy/")
+    synth_bool      = st.selectbox("Use Synthetic:", (True, False), index=1)
+    random_state    = st.number_input("Random State:", min_value=42, max_value=None)
     MainPage()
     RandomForest()
     NeuralNetwork()
