@@ -42,15 +42,24 @@ def get_correlation_heatmap(df):
     st.plotly_chart(fig, theme="streamlit")
 
 def plot_history(history):
-    fig = px.line(
+    fig_loss = px.line(
         history.history,
-        y=["loss", "val_loss", "accuracy", "val_accuracy"],
+        y=["loss", "val_loss"],
         labels={"x": "Epoch", "y": "Loss"},
         title="Training Log",
         width=1080,
         height=800
     )
-    st.plotly_chart(fig, theme="streamlit", use_container_width=True)
+    st.plotly_chart(fig_loss, theme="streamlit", use_container_width=True)
+    fig_acc = px.line(
+        history.history,
+        y=["accuracy", "val_accuracy"],
+        labels={"x": "Epoch", "y": "Accuracy"},
+        title="Training Log",
+        width=1080,
+        height=800
+    )
+    st.plotly_chart(fig_acc, theme="streamlit", use_container_width=True)
 
 def split_dataset(x, y, train_size, state):
     x_train, x_test, y_train, y_test = train_test_split(
@@ -70,17 +79,17 @@ def RandomForest():
 
         model.fit(x_train, y_train)
         y_pred = model.predict(x_test)
-        c1, c2, c3, c4 = st.columns(4, gap='small')
-        with c1:
+        rf_c1, rf_c2, rf_c3, rf_c4 = st.columns(4, gap='small')
+        with rf_c1:
             st.header("Accuracy")
             st.write(metrics.accuracy_score(y_test, y_pred))
-        with c2:
+        with rf_c2:
             st.header("Precision")
             st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
-        with c3:
+        with rf_c3:
             st.header("Recall")
             st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
-        with c4:
+        with rf_c4:
             st.header("F1")
             st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
         RF_run_lock = False
@@ -98,17 +107,17 @@ def GradientBoosting():
 
         model.fit(x_train, y_train)
         y_pred = model.predict(x_test)
-        c1, c2, c3, c4 = st.columns(4, gap='small')
-        with c1:
+        gb_c1, gb_c2, gb_c3, gb_c4 = st.columns(4, gap='small')
+        with gb_c1:
             st.header("Accuracy")
             st.write(metrics.accuracy_score(y_test, y_pred))
-        with c2:
+        with gb_c2:
             st.header("Precision")
             st.write(metrics.precision_score(y_test, y_pred, average="weighted"))
-        with c3:
+        with gb_c3:
             st.header("Recall")
             st.write(metrics.recall_score(y_test, y_pred, average="weighted"))
-        with c4:
+        with gb_c4:
             st.header("F1")
             st.write(metrics.f1_score(y_test, y_pred, average="weighted"))
         GB_run_lock = False
@@ -197,7 +206,7 @@ def NeuralNetwork():
         y_pred = model.predict(x_test)
         y_pred = pd.Series([int(np.argmax(row)) for row in y_pred], name='quality')
         #f1_score = sklearn.metrics.f1_score(y_pred, y_test,average="weighted", zero_division='warn')
-        c1, c2, c3, c4, c5 = st.columns(5, gap='small')
+        c1, c2, c3, c4 = st.columns(4, gap='small')
         with c1:
             st.header("Accuracy")
             st.write(metrics.accuracy_score(y_test, y_pred))
