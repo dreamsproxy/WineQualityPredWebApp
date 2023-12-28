@@ -191,7 +191,7 @@ def NeuralNetwork():
     if data_ready:
         data_ready_lock = True
         build_lock = False
-    build_bool  = st.sidebar.button("Build and Train Model", disabled=build_lock)
+    build_bool  = st.button("Build and Train Model", disabled=build_lock)
     if data_ready:
         data_ready_lock = True
         x_train, x_test, y_train, y_test = split_dataset(x, y, split_size, random_state)
