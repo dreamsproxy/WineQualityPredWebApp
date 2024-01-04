@@ -1,6 +1,11 @@
+numpy
+pandas
+numba
+pickle
 plotly
 seaborn
 tensorflow
 scikit-learn
-stqdm
 scipy
+streamlit
+stqdm
